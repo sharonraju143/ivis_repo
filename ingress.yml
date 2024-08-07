@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: internal-ingress
+  namespace: default
+spec:
+  rules:
+  - host: internal.example.com
+    http:
+      paths:
+      - path: /camera1
+        pathType: Prefix
+        backend:
+          service:
+            name: ivis-vms-service1
+            port:
+              number: 80
+      - path: /camera2
+        pathType: Prefix
+        backend:
+          service:
+            name: ivis-vms-service2
+            port:
+              number: 80
+

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ivis-vms-deployment2
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ivis-vms
+      instance: instance2
+  template:
+    metadata:
+      labels:
+        app: ivis-vms
+        instance: instance2
+    spec:
+      containers:
+      - name: ivis-vms-container
+        image: sharonraju143/ivis_vms
+        env:
+        - name: CAMERA_URL
+          valueFrom:
+            configMapKeyRef:
+              name: url-config2
+              key: CAMERA_URL
+        ports:
+        - containerPort: 80
+
